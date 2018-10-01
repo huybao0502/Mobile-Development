@@ -106,7 +106,7 @@ export default class App extends React.Component {
          keyboardType="numeric"
         />
         <Button onPress={this.buttonPressed} title="MAKE GUESS"/>
-        <Text>Highscore: {this.state.highscore}</Text>
+        <Text>Highscore: {this.state.highscore} + guesses</Text>
       </View>
     );
   }
