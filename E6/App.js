@@ -62,6 +62,24 @@ export default class App extends React.Component {
       }
       else{
         Alert.alert('You guessed the number in ' + this.state.numofguess + ' guesses');
+        if(+this.state.highscore > 0 && this.state.numofguess < +this.state.highscore) {
+          this.setState(() => {
+            return {
+              highscore: this.state.numofguess,
+            }
+          });
+          this.savescore(this.state.numofguess);
+        }
+        else{
+           if(+this.state.highscore < 1){
+            this.setState(() => {
+            return {
+              highscore: this.state.numofguess,
+            }
+          });
+          this.savescore(this.state.numofguess);
+          }
+        }
          this.setState(() => {
           return { 
             guess:'', 
@@ -74,6 +92,10 @@ export default class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.getscore();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -84,6 +106,7 @@ export default class App extends React.Component {
          keyboardType="numeric"
         />
         <Button onPress={this.buttonPressed} title="MAKE GUESS"/>
+        <Text>Highscore: {this.state.highscore}</Text>
       </View>
     );
   }
